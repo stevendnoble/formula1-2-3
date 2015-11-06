@@ -99,11 +99,27 @@ function createMultiplicationProblem(minDigit, maxDigit, numPossibleSolutions) {
 	var product = num1 * num2;
 	possibleSolutions.push(product);
 	for(i=0; i<numPossibleSolutions-1; i++) {
-		do {
-			possibleSolution = randDigit(minDigit, maxDigit) + randDigit(minDigit, maxDigit);
-		} while ((possibleSolution <= Math.max(num1, num2)) || (possibleSolutions.indexOf(possibleSolution) != -1));
-		possibleSolutions.push(possibleSolution);
+		possibleSolutions.push(Math.round(product*(Math.random() + 0.5)));
 	}
 	return [num1, num2, product, possibleSolutions];
 }
 
+// Returns two numbers, their quotient, and an array of given length of false 
+// possible solutions plus the correct solution. Checks for possible solutions:
+//   must be unique solutions
+function createDivisionProblem(numPossibleSolutions) {
+	var num1,
+			possibleSolution,
+			possibleSolutions = [],
+			num2 = randDigit(1, 9);
+	quotient = randDigit(0, 9);
+	num1 = quotient * num2;
+	possibleSolutions.push(quotient);
+	while(possibleSolutions.length < numPossibleSolutions) {
+		possibleSolution = randDigit(1, 9);
+		if (possibleSolutions.indexOf(possibleSolution) === -1) {
+			possibleSolutions.push(possibleSolution);
+		}
+	}
+	return [num1, num2, quotient, possibleSolutions];
+}

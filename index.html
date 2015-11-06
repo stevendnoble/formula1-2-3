@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- set viewport to device width to make site responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap css -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- custom styles -->
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+
+  <title>Formula 1-2-3</title>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12" id="titlebar">
+        <h1 class="text-center">Formula 1-2-3</h1>
+      </div>
+    </div>
+
+    <div class="row" id="racetrack">
+      <hr>
+      <hr>
+      <hr>
+    </div>
+    <div class="row">
+
+      <div class="col-md-3 box player">
+        <div class="row p1name">
+          <div class="input-group" id="p1hide">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="p1btn" type="button">Enter</button>
+            </span>
+            <input type="text" class="form-control" id="p1namebox" placeholder="Player 1">
+          </div>
+          <h2 class="text-center">
+          </h2>
+        </div>      
+      </div>
+
+      <div class="col-md-6 box centerconsole">
+
+        <div class="gamesetup box">
+          <h2>Welcome to Formula 1-2-3 Racing!<h2>
+          <hr>
+          <h3>Please enter the player's names and choose the game you would like to play.</h3>
+          <br />
+          <form>
+            <div class="btn-group text-center" role="group">
+              <button type="button" class="btn-warning btn btn-block gameselect">Simple Addition</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Double Digit Addition</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Simple Subtraction</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Double Digit Subtraction</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Single Digit Multiplication</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Double Digit Multiplication</button>
+              <button type="button" class="btn-warning btn btn-block gameselect">Simple Division</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="messages box">
+          <h2>Messages</h2>
+        </div>
+
+        <div class="questions box">
+          <p>Questions</p>
+        </div>
+
+      </div>
+
+      <div class="col-md-3 box player">
+        <div class="row p2name">
+          <div class="input-group" id="p2hide">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="p2btn" type="button">Enter</button>
+            </span>
+            <input type="text" class="form-control" id="p2namebox" placeholder="Player 2">
+          </div>
+          <h2 class="text-center">
+          </h2>
+        </div>      
+      </div>
+
+    </div>
+  </div>
+
+  <!-- jquery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- bootstrap js -->
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- handlebars js -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.4/handlebars.min.js"></script>
+
+  <!-- custom script -->
+  <script type="text/javascript" src="main.js"></script>
+</body>
+</html>

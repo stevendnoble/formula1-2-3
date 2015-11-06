@@ -1,0 +1,57 @@
+h1 {
+	font-size: 400%;
+	color: orange;
+	font-family: 'Press Start 2P', cursive;
+}
+
+h2 {
+	color: yellow;
+}
+
+hr {
+	background: darkred;
+}
+
+body {
+	background-color: darkred;
+	color: lightyellow;
+}
+
+.box {
+	padding: 20px;
+	border: 3px solid orange;
+}
+
+#titlebar {
+	background-color: darkred;
+}
+
+#racetrack {
+	background-color: darkgray;
+}
+
+.centerconsole {
+	background-color: darkred;
+	border: 3px orange;
+	height: ;
+}
+
+.player {
+	background-color: darkred;
+	border: 3px orange;
+}
+
+.messages {
+/*	display: none;
+*/}
+
+.questions {
+/*	display: none;
+*/}
+
+.gamesetup {
+
+}
+
+
+

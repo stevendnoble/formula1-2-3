@@ -10,7 +10,10 @@
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- custom styles -->
-  <link rel="stylesheet" type="text/css" href="main.css">
+  <link rel="stylesheet" type="text/css" class="selectcss" href="main.css">
+  <link rel="stylesheet" type="text/css" class="selectcss" href="popprincess.css">
+  <link rel="stylesheet" type="text/css" class="selectcss" href="geography.css">
+
   <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 
   <title>Formula 1-2-3</title>
@@ -24,24 +27,28 @@
       </div>
     </div>
 
-    <div class="row" id="racetrack">
-      <hr>
-      <hr>
-      <hr>
+    <div class="row racetrack" id="track1">
+      <img src="avatars/avatar1.png" id="player1avatar">
+    </div>
+    <div class="row racetrack" id="track2">
+      <img src="avatars/avatar2.png" id="player2avatar">
     </div>
     <div class="row">
 
       <div class="col-md-3 box player">
         <div class="row p1name">
           <div class="input-group" id="p1hide">
-            <span class="input-group-btn">
-              <button class="btn btn-default" id="p1btn" type="button">Enter</button>
-            </span>
             <input type="text" class="form-control" id="p1namebox" placeholder="Player 1">
+            <span class="input-group-btn">
+              <button class="btn btn-warning" id="p1btn" type="button">?</button>
+            </span>
           </div>
           <h2 class="text-center">
           </h2>
-        </div>      
+        </div> 
+        <div class="row p1results">
+
+        </div>
       </div>
 
       <div class="col-md-6 box centerconsole">
@@ -65,10 +72,25 @@
         </div>
 
         <div class="messages box">
-          <h2>Messages</h2>
+          <div class="row">
+            <h2 class="text-center">Instructions</h2>          
+            <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
+            <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use A, S, and D.</h3>
+            <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, your opponent will move forward.</h3>
+            <h3>May the odds be even in your flavor.  Or something like that.</h3>
+            <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
+          </div>
+          <div class="row game-results">
+            
+          </div>
         </div>
 
-        <div class="questions box">
+        <div class="questions box text-center">
+          <div id="countdown">
+            <h1>Ready</h1>
+            <h1>Set</h1>
+            <h1>Go!</h1>
+          </div>
           <p>Questions</p>
         </div>
 
@@ -78,13 +100,17 @@
         <div class="row p2name">
           <div class="input-group" id="p2hide">
             <span class="input-group-btn">
-              <button class="btn btn-default" id="p2btn" type="button">Enter</button>
+              <button class="btn btn-warning" id="p2btn" type="button">?</button>
             </span>
             <input type="text" class="form-control" id="p2namebox" placeholder="Player 2">
           </div>
           <h2 class="text-center">
           </h2>
-        </div>      
+        </div> 
+        <div class="row p1results">
+
+        </div>
+     
       </div>
 
     </div>
@@ -101,5 +127,6 @@
 
   <!-- custom script -->
   <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
 </body>
 </html>

@@ -25,9 +25,6 @@ function createAdditionProblem(minDigit, maxDigit, numPossibleSolutions) {
 	return [num1, num2, sum, possibleSolutions];
 }
 
-// In game, allow for option of simple subtraction, double digit subtraction, or range.
-// For single and double, just enter the range for the user
-
 // Returns two numbers within range, their difference, and an array
 // of given length of false possible solutions plus the correct solution
 // Checks for possible solutions:  must be less than the larger of the numbers,
@@ -57,35 +54,39 @@ function createSubtractionProblem(minDigit, maxDigit, numPossibleSolutions) {
 // of given length of false possible solutions plus the correct solution
 // Checks for possible solutions:  must be multiple of one of the numbers,
 //   must be greater than the sum of the two numbers, and must be unique solutions
-function createSDMultiplicationProblem(numPossibleSolutions) {
-	var multiples = [],
-			product,
-			index,
-			possibleSolutions = [],
-			num1 = randDigit(0, 9),
-			num2 = randDigit(0, 9);			
-	while(num1===0 && num2===0) num2 = randDigit(0,9);
-	product = num1 * num2;
-	for(i=0; i<10; i++) {
-		multiples.push(num1 * i);
-		multiples.push(num2 * i);
-	}
-	// Filter repeats, multiples less than the sum of the two numbers, and the product
-	multiples = multiples.filter(function(element, position) {
-		return multiples.indexOf(element) == position;
-	}); 
-	multiples = multiples.filter(function(element) {
-		return !(element < (num1 + num2));
-	}); 
-	multiples.splice(multiples.indexOf(product), 1);
-	
-	for(i=0; i<numPossibleSolutions; i++) {
-		index = randDigit(0, (multiples.length-1));
-		possibleSolutions.push(multiples[index]);
-		multiples.splice(index, 1);
-	}
-	return [num1, num2, product, possibleSolutions];
-}
+// function createSDMultiplicationProblem(numPossibleSolutions) {
+// 	var multiples = [],
+// 			filteredmultiples = [],
+// 			product,
+// 			index,
+// 			possibleSolutions = [],
+// 			num1 = randDigit(0, 9),
+// 			num2 = randDigit(0, 9);			
+// 	while(num1===0 && num2===0) num2 = randDigit(0,9);
+// 	product = num1 * num2;
+// 	for(i=0; i<10; i++) {
+// 		multiples.push(num1 * i);
+// 		multiples.push(num2 * i);
+// 	}
+// 	// Filter repeats, multiples less than the sum of the two numbers, and the product
+// 	filteredmultiples = multiples.filter(function(element, position) {
+// 		return multiples.indexOf(element) == position;
+// 	}); 
+// 	multiples = filteredmultiples;
+// 	multiples = multiples.filter(function(element) {
+// 		return !(element < (num1 + num2));
+// 	}); 
+// 	while(multiples.indexOf(product) !== -1) {
+// 		multiples.splice(multiples.indexOf(product), 1);
+// 	}
+// 	for(i=0; i<numPossibleSolutions - 1; i++) {
+// 		index = randDigit(0, (multiples.length-1));
+// 		possibleSolutions.push(multiples[index]);
+// 		multiples.splice(index, 1);
+// 	}
+// 	possibleSolutions.unshift(product);
+// 	return [num1, num2, product, possibleSolutions];
+// }
 
 // Returns two numbers within range, their produce, and an array
 // of given length of false possible solutions plus the correct solution
@@ -96,10 +97,16 @@ function createMultiplicationProblem(minDigit, maxDigit, numPossibleSolutions) {
 	var possibleSolutions = [];
 	var num1 = randDigit(minDigit, maxDigit);
 	var num2 = randDigit(minDigit, maxDigit);
+	while (num1 === 1 && num2 === 1) {
+		num2 = randDigit(minDigit, maxDigit);
+	}
 	var product = num1 * num2;
 	possibleSolutions.push(product);
-	for(i=0; i<numPossibleSolutions-1; i++) {
-		possibleSolutions.push(Math.round(product*(Math.random() + 0.5)));
+	while(possibleSolutions.length < numPossibleSolutions) {
+		possibleSolution = Math.round(product*(Math.random() + 0.5));
+		if(possibleSolutions.indexOf(possibleSolution) === -1) {
+			possibleSolutions.push(possibleSolution);
+		}
 	}
 	return [num1, num2, product, possibleSolutions];
 }
@@ -107,7 +114,7 @@ function createMultiplicationProblem(minDigit, maxDigit, numPossibleSolutions) {
 // Returns two numbers, their quotient, and an array of given length of false 
 // possible solutions plus the correct solution. Checks for possible solutions:
 //   must be unique solutions
-function createDivisionProblem(numPossibleSolutions) {
+function createSimpleDivisionProblem(numPossibleSolutions) {
 	var num1,
 			possibleSolution,
 			possibleSolutions = [],

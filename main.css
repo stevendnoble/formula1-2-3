@@ -1,7 +1,7 @@
 h1 {
 	font-size: 400%;
 	color: orange;
-	font-family: 'Press Start 2P', cursive;
+	font-family: 'Press Start 2P';
 }
 
 h2 {
@@ -17,40 +17,55 @@ body {
 	color: lightyellow;
 }
 
+img {
+	height: 50px;
+}
+
+span {
+	color: yellow;
+}
+
 .box {
 	padding: 20px;
-	border: 3px solid orange;
+}
+
+.btn {
+	border-radius: 0px;
+	font-size: 16px;
+}
+
+.form-control {
+	font-size: 18px;
+	color: darkred;
 }
 
 #titlebar {
-	background-color: darkred;
 }
 
-#racetrack {
+.racetrack {
 	background-color: darkgray;
+	height: 60px;
+	padding: 5px;
+}
+
+#track1 {
+	border-bottom: 3px dotted yellow;
 }
 
 .centerconsole {
-	background-color: darkred;
-	border: 3px orange;
-	height: ;
-}
-
-.player {
-	background-color: darkred;
-	border: 3px orange;
+	height: 1200px;
 }
 
 .messages {
-/*	display: none;
-*/}
+	border: 3px solid orange;
+}
 
 .questions {
-/*	display: none;
+/*	border: 3px solid orange;
 */}
 
 .gamesetup {
-
+	border: 3px solid orange;
 }
 
 

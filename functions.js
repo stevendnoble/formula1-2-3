@@ -2,6 +2,17 @@ function randDigit(min, max) {
 	return Math.floor(Math.random() * (max-min + 1) + min);
 }
 
+function randomizeArray(array) {
+	var newArr = [],
+			index;
+	while(array.length > 0) {
+		index = randDigit(0, (array.length - 1));
+		newArr.push(array[index]);
+		array.splice(index, 1);
+	}
+	return newArr;
+}
+
 // In game, allow for option of simple addition, double digit addition, or range.
 // For single and double, just enter the range for the user
 

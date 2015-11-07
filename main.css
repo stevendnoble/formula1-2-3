@@ -1,11 +1,27 @@
 h1 {
 	font-size: 400%;
-	color: orange;
+	color: darkorange;
 	font-family: 'Press Start 2P';
 }
 
 h2 {
 	color: yellow;
+}
+
+p.huge {
+	font-size: 400%;
+}
+
+.answer {
+	color: yellow;
+}
+
+.question {
+	padding-right: 30px;
+}
+
+.underline {
+	text-decoration: underline;
 }
 
 hr {
@@ -68,5 +84,16 @@ span {
 	border: 3px solid orange;
 }
 
+.gamebutton {
+	border: 5px solid darkred;
+	padding: 10px 0px 0px 0px;
+	margin: 5px 0px;
+	font-size: 200%;
+	background-color: orange;
+	color: darkred;
+}
 
+.highlight {
+	background-color: yellow;
+}
 

@@ -21,21 +21,24 @@
 <body>
   <div class="container">
 
-    <div class="row">
+    <div class="row"> <!-- Title Bar -->
       <div class="col-md-12" id="titlebar">
         <h1 class="text-center">Formula 1-2-3</h1>
       </div>
     </div>
 
-    <div class="row racetrack" id="track1">
-      <img src="avatars/avatar1.png" id="player1avatar">
+    <div class="racetrackandavatars">
+      <div class="row racetrack" id="track1">
+        <img src="avatars/avatar3.png" id="player1avatar">
+      </div>
+      <div class="row racetrack" id="track2">
+        <img src="avatars/avatar6.png" id="player2avatar">
+      </div>
     </div>
-    <div class="row racetrack" id="track2">
-      <img src="avatars/avatar2.png" id="player2avatar">
-    </div>
+
     <div class="row">
 
-      <div class="col-md-3 box player">
+      <div class="col-md-3 box player">  <!-- Player 1 Column -->
         <div class="row p1name">
           <div class="input-group" id="p1hide">
             <input type="text" class="form-control" id="p1namebox" placeholder="Player 1">
@@ -53,6 +56,8 @@
 
       <div class="col-md-6 box centerconsole">
 
+        <!-- There are several boxes within the console that are hidden and shown using
+        jquery at the appropriate times during the game. -->
         <div class="gamesetup box">
           <h2>Welcome to Formula 1-2-3 Racing!<h2>
           <hr>
@@ -75,7 +80,7 @@
           <div class="row">
             <h2 class="text-center">Instructions</h2>          
             <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
-            <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use A, S, and D.</h3>
+            <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use J, K, and L.</h3>
             <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, your opponent will move forward.</h3>
             <h3>May the odds be even in your flavor.  Or something like that.</h3>
             <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
@@ -85,15 +90,56 @@
           </div>
         </div>
 
-        <div class="questions box text-center">
-          <div id="countdown">
-            <h1>Ready</h1>
-            <h1>Set</h1>
-            <h1>Go!</h1>
-          </div>
-          <p>Questions</p>
+        <div class="countdown text-center">
+          <br><br><br><br>
+          <h1>Ready</h1>
+          <h1>Set</h1>
+          <h1>Go!</h1>
         </div>
 
+        <div class="questions">
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 question text-right">
+              <p class="huge num1"></p>
+              <p class="huge underline num2"></p>          
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="97"><p>A</p></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+              <p class="huge answer" id="answer1"></p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="106"><p>J</p></div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="115"><p>S</p></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+              <p class="huge answer" id="answer2"></p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="107"><p>K</p></div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="100"><p>D</p></div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+              <p class="huge answer" id="answer3"></p>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2 gamebutton" id="108"><p>L</p></div>
+            <div class="col-md-1"></div>
+          </div>
+        </div>
       </div>
 
       <div class="col-md-3 box player">
@@ -107,10 +153,9 @@
           <h2 class="text-center">
           </h2>
         </div> 
-        <div class="row p1results">
+        <div class="row p2results">
 
         </div>
-     
       </div>
 
     </div>

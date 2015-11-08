@@ -8,38 +8,43 @@ h2 {
 	color: yellow;
 }
 
-p.huge {
-	font-size: 400%;
-}
-
-.answer {
-	color: yellow;
-}
-
-.question {
-	padding-right: 30px;
-}
-
-.underline {
-	text-decoration: underline;
-}
-
-hr {
-	background: darkred;
-}
-
 body {
 	background-color: darkred;
 	color: lightyellow;
 }
 
-img {
+img.avatar {
 	height: 50px;
+	position: relative;
+	left: 0px;
 }
 
 span {
 	color: yellow;
 }
+
+
+
+/*
+	Classes for questions and answers 
+*/
+	.question {
+		font-size: 400%;
+		padding-right: 30px;
+	}
+
+	.answer {
+		font-size: 400%;
+		color: yellow;
+	}
+
+	.underline {
+		text-decoration: underline;
+	}
+
+	.highlight {
+		background-color: yellow;
+	}
 
 .box {
 	padding: 20px;
@@ -55,16 +60,14 @@ span {
 	color: darkred;
 }
 
-#titlebar {
-}
-
+/*Coloring the racetrack*/
 .racetrack {
 	background-color: darkgray;
 	height: 60px;
 	padding: 5px;
 }
 
-#track1 {
+.racetrack:nth-of-type(1) {
 	border-bottom: 3px dotted yellow;
 }
 
@@ -93,7 +96,11 @@ span {
 	color: darkred;
 }
 
-.highlight {
-	background-color: yellow;
+.correct {
+	color: green;
+}
+
+.incorrect {
+	color: red;
 }
 

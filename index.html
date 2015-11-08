@@ -11,9 +11,9 @@
 
   <!-- custom styles -->
   <link rel="stylesheet" type="text/css" class="selectcss" href="main.css">
-  <link rel="stylesheet" type="text/css" class="selectcss" href="popprincess.css">
+<!--   <link rel="stylesheet" type="text/css" class="selectcss" href="popprincess.css">
   <link rel="stylesheet" type="text/css" class="selectcss" href="geography.css">
-
+ -->
   <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
 
   <title>Formula 1-2-3</title>
@@ -43,7 +43,7 @@
           <div class="input-group" id="player1hide">
             <input type="text" class="form-control" id="player1namebox" placeholder="Player 1">
             <span class="input-group-btn">
-              <button class="btn btn-warning player" id="player1btn" type="button">?</button>
+              <button class="btn btn-warning player" id="player1btn" type="button">Press me!</button>
             </span>
           </div>
           <h2 class="text-center">
@@ -76,18 +76,19 @@
           </form>
         </div>
 
-        <div class="messages box">
-          <div class="row">
-            <h2 class="text-center">Instructions</h2>          
-            <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
-            <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use J, K, and L.</h3>
-            <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, your opponent will move forward.</h3>
-            <h3>May the odds be even in your flavor.  Or something like that.</h3>
-            <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
-          </div>
-          <div class="row game-results">
-            
-          </div>
+        <div class="instructions box">
+          <h2 class="text-center">Instructions</h2>          
+          <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
+          <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use J, K, and L.</h3>
+          <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, you will roll backward.</h3>
+          <h3>May the odds be even in your flavor.  Or something like that.</h3>
+          <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
+        </div>
+        <div class="gameresults">
+          <h2 class="text-center">CONGRATULATIONS</h2>          
+          <h2 class="text-left"><span id="winner"></span> won the game!</h3>
+          <h2>Click the box below to start a new game.</h2>
+          <button class="btn btn-warning btn-default btn-block choosegame">Click me</button>
         </div>
 
         <div class="countdown text-center">
@@ -100,9 +101,9 @@
         <div class="questions">
           <div class="row question">
             <div class="col-md-4"></div>
-            <div class="col-md-4 text-right">
-              <p class="num1"></p>
-              <p class="underline num2"></p>          
+            <div class="col-md-4 text-center">
+              <p><span class="num1"></span></p>
+              <p class="underline"><span class="num2"></span></p>          
             </div>
             <div class="col-md-4"></div>
           </div>
@@ -146,7 +147,7 @@
         <div class="row player2name">
           <div class="input-group" id="player2hide">
             <span class="input-group-btn">
-              <button class="btn btn-warning playername" id="player2btn" type="button">?</button>
+              <button class="btn btn-warning playername" id="player2btn" type="button">Press me too!</button>
             </span>
             <input type="text" class="form-control" id="player2namebox" placeholder="Player 2">
           </div>

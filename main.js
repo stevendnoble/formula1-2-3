@@ -3,11 +3,13 @@ $(document).ready(function() {
 
 	// Define global variables
 	var $gamesetup = $('.gamesetup'),
-			$messages = $('.messages'),
+			$instructions = $('.instructions'),
 			$questions = $('.questions'),
 			$gameselect = $('.gameselect'),
 			$playgame = $('.playgame'),
 			$countdown = $('.countdown');
+			$choosegame = $('.choosegame');
+			$gameresults = $('.gameresults');
 
 	var player1name = 'Player 1',
 			player2name = 'Player 2',
@@ -17,10 +19,34 @@ $(document).ready(function() {
 			question,
 			operator;
 
+				// OOP ATTEMPT
+				// var Player = function (name, avatar, namebox, hide) {
+				// 	this.name = name;
+				// 	this.avatar = avatar;
+				// 	this.namebox = namebox;
+				// 	this.hide = hide;
+				// };
+				// var player = [
+				// 	0,
+				// 	new Player(player1name, player1avatar, player1namebox, player1hide),
+				// 	new Player(player2name, player2avatar, player2namebox, player2hide)
+				// ];
+
 	// Event Handlers
+
+				// OOP ATTEMPT
+				// function changeName(event) {
+				// 	var playernum = Number($(this).attr('id').slice(6, 7));  // player1btn
+				// 	if (player[playernum][name] === '') {
+				// 		alert("You must enter a name first.");
+				// 	} else {
+				// 		$('#' + player[playernum][hide]).hide();
+				// 		$('.' + player[playernum][name] + ' > h2').append(player[playernum][name]);
+				// 	}  
+				// }
+
 	function changeName1(event) {
 		player1name = $('#player1namebox').val();
-		console.log(player1name);
 		if (player1name === '') {
 			alert("You must enter a name first.");
 		} else {
@@ -49,14 +75,14 @@ $(document).ready(function() {
 	}
 	function changeAvatar1(event) {
 		do {
-			player1avatar = (player1avatar + 1) % 20;	
+			player1avatar = (player1avatar + 1) % 10;	
 		} while (player1avatar === player2avatar);
 		var player1avatarstr = 'avatars/avatar' + player1avatar + '.png';
 		$('#player1avatar').attr("src", player1avatarstr);
 	}
 	function changeAvatar2(event) {
 		do {
-			player2avatar = (player2avatar + 1) % 20;	
+			player2avatar = (player2avatar + 1) % 10;	
 		} while (player1avatar === player2avatar);
 		var player2avatarstr = 'avatars/avatar' + player2avatar + '.png';
 		$('#player2avatar').attr("src", player2avatarstr);
@@ -71,20 +97,22 @@ $(document).ready(function() {
 		$('.player2name > h2').click(changeBack2);
 		$('#player1avatar').click(changeAvatar1);
 		$('#player2avatar').click(changeAvatar2);
+		$choosegame.click(setBoard);
 		$gameselect.click(gameSelect);
 		$questions.hide();
-		$messages.hide();
+		$instructions.hide();
 		$countdown.hide();
+		$gameresults.hide();
 	}
 
 	// Upon choosing game, shows instructions which have the click handler to playGame
 	function gameSelect(event){
 		$gamesetup.hide();
-		$messages.show();
+		$instructions.show();
 		currentGame = $(this).text();  // i.e. 'Simple Addition'
-		$('.messages span#game').text(currentGame);
-		$('.messages span#player1').text(player1name);
-		$('.messages span#player2').text(player2name);
+		$('.instructions span#game').text(currentGame);
+		$('.instructions span#player1').text(player1name);
+		$('.instructions span#player2').text(player2name);
 		$playgame.click(playGame);	
 	}
 
@@ -92,18 +120,18 @@ $(document).ready(function() {
 	// handler for keypress (needs animation still)
 	function playGame () {
 		var keycode;
-		$messages.hide();
-		$('.countdown > h1:nth-child(1)').fadeIn(500).fadeOut(500);
-		$('.countdown > h1:nth-child(2)').delay(1000).fadeIn(500).fadeOut(500);
-		$('.countdown > h1:nth-child(3)').delay(2000).fadeIn(500).fadeOut(500);
-		$questions.show();
-		createQuestion(currentGame);
-		$(document).keypress(pressKey);
-	}
-
-	// Click handler for keypress (still needs checkWinner function and animation)
-	function correctAnswer(player, playeranswer) {
-
+		$questions.hide();
+		$instructions.hide();
+		// $('.countdown').show();
+		var fadetime = 200;
+		$('.countdown > h1:nth-child(1)').fadeIn(fadetime).fadeOut(fadetime);
+		$('.countdown > h1:nth-child(2)').delay(2*fadetime).fadeIn(fadetime).fadeOut(fadetime);
+		$('.countdown > h1:nth-child(3)').delay(4*fadetime).fadeIn(fadetime).fadeOut(fadetime);
+		window.setTimeout(function() { 
+			$questions.show(); 
+			createQuestion(currentGame);
+			$(document).keypress(pressKey);
+		}, 3000);
 	}
 
 	function pressKey() {
@@ -116,7 +144,6 @@ $(document).ready(function() {
 			this.player = player;
 			this.arraynumber = arraynumber;
 		}
-
 		var keycodes = [];
 		keycodes.push(new KeycodeConvert( 97,  '#97', '#answer1', 'player1', 0));
 		keycodes.push(new KeycodeConvert(106, '#106', '#answer1', 'player2', 0));
@@ -138,14 +165,13 @@ $(document).ready(function() {
 		if(question[2]==question[3][keycodes[index].arraynumber]) {
 			$(keycodes[index].answer).addClass('correct');
 			$('.'+ keycodes[index].player + 'results').prepend('<p>You answered correctly. Way to go!</p>');
-			$('img#'+ keycodes[index].player +'avatar').animate({left: '+=40'});
+			$('img#'+ keycodes[index].player +'avatar').animate({left: '+=200'});
 		} else {
 			$(keycodes[index].answer).addClass('incorrect');
 			$('.'+ keycodes[index].player + 'results').prepend('<p>You answered incorrectly. Better luck next time.</p>');
-			$('img#'+ keycodes[index].player +'avatar').animate({left: '-=25'});
+			$('img#'+ keycodes[index].player +'avatar').animate({left: '-=120'});
 		}
-
-
+		// Old expanded code for this function - Can remove once everything is working properly.
 		// switch(keycode) {
 		// 	case 97:
 		// 		$('#97').addClass('highlight');
@@ -220,13 +246,8 @@ $(document).ready(function() {
 		// 		}
 		// 		break;
 		// }
-		// if (checkWinner()) {
-
-
-		// 	setBoard();
-		// } else {
-			playGame();
-		// }
+		window.setTimeout(checkWinner, 1000);
+		playGame();
 	}
 
 	// Function for generating questions and appending the information to the page
@@ -282,9 +303,30 @@ $(document).ready(function() {
 		$('#answer3').text(answers[2]);
 	}
 
+	// *************************
 	// Still needs to be written
 	function checkWinner () {
-		console.log("CONGRATS!");
+		var racetrack = $('.racetrack').width() - 2 * Number($('.racetrack').css('padding').slice(0,-2));
+		var avatarwidth = $('#player2avatar').width();
+		var avatar1traveled = Number($('#player1avatar').css('left').slice(0, -2));
+		var avatar2traveled = Number($('#player2avatar').css('left').slice(0, -2));
+		var winningCondition = racetrack - avatarwidth;
+		console.log(winningCondition, player1name, avatar1traveled, player2name, avatar2traveled);
+		if (avatar1traveled >= winningCondition) {
+			winner = 'player1';
+			console.log(player1name + ' wins the game!');
+		} else if (avatar2traveled >= winningCondition) {
+			winner = 'player2';
+			console.log(player2name + ' wins the game!');
+		} else {
+			winner = false;
+			console.log('Nobody wins yet. Play on, my friend!');
+		}
+		if (winner) {
+			// animation
+			$questions.hide();
+			$gameresults.show();
+		}
 	}
 
 	// Starts the game

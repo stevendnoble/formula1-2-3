@@ -50,7 +50,21 @@
           </h2>
         </div> 
         <div class="row player1results">
-
+          <h3>Questions Answered
+          <ul>
+            <li>Correct:  <span id="player1correct">0</span></li>
+            <li>Incorrect:  <span id="player1incorrect">0</span></li>
+          </ul>
+          </h3>
+          <h3>Results
+          <ul>
+            <li>Wins:  <span id="player1wins">0</span></li>
+            <li>Losses:  <span id="player1losses">0</span></li>
+          </ul>
+          </h3>
+          <h3>
+            <span id="player1message"></span>
+          </h3>
         </div>
       </div>
 
@@ -61,7 +75,7 @@
         <div class="gamesetup box">
           <h2>Welcome to Formula 1-2-3 Racing!<h2>
           <hr>
-          <h3>Please enter the player's names and choose the game you would like to play.</h3>
+          <h3>Please enter the player's names, choose your cars by clicking on them, and choose a game to play.</h3>
           <br />
           <form>
             <div class="btn-group text-center" role="group">
@@ -81,9 +95,10 @@
           <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
           <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use J, K, and L.</h3>
           <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, you will roll backward.</h3>
-          <h3>May the odds be even in your flavor.  Or something like that.</h3>
+          <h3>Gentlepeople, start your engines!</h3>
           <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
         </div>
+
         <div class="gameresults">
           <h2 class="text-center">CONGRATULATIONS</h2>          
           <h2 class="text-left"><span id="winner"></span> won the game!</h3>
@@ -101,7 +116,7 @@
         <div class="questions">
           <div class="row question">
             <div class="col-md-4"></div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4 text-right">
               <p><span class="num1"></span></p>
               <p class="underline"><span class="num2"></span></p>          
             </div>
@@ -155,7 +170,21 @@
           </h2>
         </div> 
         <div class="row player2results">
-
+          <h3>Questions Answered
+          <ul>
+            <li>Correct:  <span id="player2correct">0</span></li>
+            <li>Incorrect:  <span id="player2incorrect">0</span></li>
+          </ul>
+          </h3>
+          <h3>Results
+          <ul>
+            <li>Wins:  <span id="player2wins">0</span></li>
+            <li>Losses:  <span id="player2losses">0</span></li>
+          </ul>
+          </h3>
+          <h3>
+            <span id="player2message"></span>
+          </h3>
         </div>
       </div>
 

@@ -92,12 +92,11 @@ $(document).ready(function() {
 	function setBoard() {
 		$('#player1btn').click(changeName1);
 		$('#player2btn').click(changeName2);
-		// $('button.playername').click(changeName);
+		// $('button.playername').click(changeName);  // Attempt to put as one handler
 		$('.player1name > h2').click(changeBack1);
 		$('.player2name > h2').click(changeBack2);
 		$('#player1avatar').click(changeAvatar1);
 		$('#player2avatar').click(changeAvatar2);
-		$choosegame.click(setBoard);
 		$gameselect.click(gameSelect);
 		$questions.hide();
 		$instructions.hide();
@@ -131,7 +130,7 @@ $(document).ready(function() {
 			$questions.show(); 
 			createQuestion(currentGame);
 			$(document).keypress(pressKey);
-		}, 3000);
+		}, 1000);
 	}
 
 	function pressKey() {
@@ -159,95 +158,78 @@ $(document).ready(function() {
 		});
 		console.log(index);
 
-		$(keycodes[index].keycodestr).addClass('highlight');
-		console.log(keycodes[index].keycodestr);
+		// Not working currently
+		// $(keycodes[index].keycodestr).addClass('highlight');
+		// console.log(keycodes[index].keycodestr);
 
+		// Messages to be displayed for correct or incorrect answers
+		correctmessages = [
+			"Gas and go!",
+			"Tight in the center!",
+			"You put the slide job on your opponent!",
+			"Rubbin' is Racin'",
+			"Reach up and pull 'em tight one more time!",
+			"My Metamucil, Depends, Ensure, Poligrip, Ford Fusion was AWESOME today!",
+			"Splash and go!",
+			"We had a real hot rod today!"
+		];
+
+		incorrectmessages = [
+			"I felt like we had a top-10 car, maybe a top-5 car.",
+			"That last caution killed us.",
+			"Debris on the track!",
+			"You picked a fine time to leave me loose wheel.",
+			"You just ran out of race track!",
+			"We didn't have anything for the 20 car.",
+			"We need to adjust to the harder tires.",
+			"Got up into the marbles."
+		];
+
+		var count;
+		// Determines if the answer is correct
 		if(question[2]==question[3][keycodes[index].arraynumber]) {
+
+			// Not working
 			$(keycodes[index].answer).addClass('correct');
-			$('.'+ keycodes[index].player + 'results').prepend('<p>You answered correctly. Way to go!</p>');
-			$('img#'+ keycodes[index].player +'avatar').animate({left: '+=200'});
+
+			// Adds a random message from the correct array to the player's message box
+			$('#'+ keycodes[index].player + 'message').text(correctmessages[randDigit(0, 8)]);
+			$('#'+ keycodes[index].player + 'message').fadeOut(3000, function () {
+				$('#'+ keycodes[index].player + 'message').text('');
+				$('#'+ keycodes[index].player + 'message').fadeIn(0);
+			});
+
+			// Moves the avatar forward 200 spaces
+			$('img#' + keycodes[index].player + 'avatar').animate({left: '+=200'});
+
+			// Updates the number of correct answers
+			count = Number($('#' + keycodes[index].player + 'correct').text())+1;
+			$('#' + keycodes[index].player + 'correct').text(count);
+
 		} else {
+
+			// Not working
 			$(keycodes[index].answer).addClass('incorrect');
-			$('.'+ keycodes[index].player + 'results').prepend('<p>You answered incorrectly. Better luck next time.</p>');
-			$('img#'+ keycodes[index].player +'avatar').animate({left: '-=120'});
+
+			// Adds a random message from the incorrect array to the player's message box
+			$('#'+ keycodes[index].player + 'message').text(incorrectmessages[randDigit(0, 8)]);
+			$('#'+ keycodes[index].player + 'message').fadeOut(3000, function () {
+				$('#'+ keycodes[index].player + 'message').text('');
+				$('#'+ keycodes[index].player + 'message').fadeIn(0);
+			});
+
+			// Moves the avatar back 120 spaces or back to the beginning
+			if (Number($('img#'+ keycodes[index].player +'avatar').css('left').slice(0, -2))<120) {
+				$('img#'+ keycodes[index].player +'avatar').css('left', '0px');
+			} else {
+				$('img#'+ keycodes[index].player +'avatar').animate({left: '-=120'});
+			}
+
+			// Updates the number of incorrect answers
+			count = Number($('#' + keycodes[index].player + 'incorrect').text())+1;
+			$('#' + keycodes[index].player + 'incorrect').text(count);
 		}
-		// Old expanded code for this function - Can remove once everything is working properly.
-		// switch(keycode) {
-		// 	case 97:
-		// 		$('#97').addClass('highlight');
-		// 		if(question[2]==question[3][0]) {
-		// 			$('#answer1').addClass('correct');
-		// 			$('.player1results').prepend('<p>You answered correctly. Way to go!</p>');
-		// 			$('img#player1avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('#answer1').addClass('incorrect');
-		// 			$('.player1results').prepend('<p>You answered incorrectly. Better luck next time.</p>');
-		// 			$('img#player2avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// 	case 106:
-		// 		$('#106').addClass('highlight');
-		// 		if(question[2]==question[3][0]) {
-		// 			$('#answer1').addClass('correct');
-		// 			$('.player2results').prepend('<p>You answered correctly. Way to go!</p>');
-		// 			$('img#player2avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('#answer1').addClass('incorrect');
-		// 			$('.player2results').prepend('<p>You answered incorrectly. Better luck next time.</p>');
-		// 			$('img#player1avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// 	case 115:
-		// 		$('#115').addClass('highlight');
-		// 		if(question[2]==question[3][1]) {
-		// 			$('#answer2').addClass('correct');
-		// 			$('.player1results').prepend('<p>You answered correctly. Nice job, ' + player1name + '!</p>');
-		// 			$('img#player1avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('#answer2').addClass('incorrect');
-		// 			$('.player1results').prepend('<p>Sorry, ' + player1name + ', you answered incorrectly</p>');
-		// 			$('img#player2avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// 	case 107:
-		// 		$('#107').addClass('highlight');
-		// 		if(question[2]==question[3][1]) {
-		// 			$('#answer2').addClass('correct');
-		// 			$('.player2results').prepend('<p>You answered correctly!  Excellent, ' + player2name + '!</p>');
-		// 			$('img#player2avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('#answer2').addClass('incorrect');
-		// 			$('.player2results').prepend('<p>You answered incorrectly!  Frowny face.</p>');
-		// 			$('img#player1avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// 	case 100:
-		// 		$('#100').addClass('highlight');
-		// 		if(question[2]==question[3][2]) {
-		// 			$('p.answer:nth-of-type(3)').addClass('correct');
-		// 			$('.player1results').prepend('<p>You answered correctly!  Woohoo!</p>');
-		// 			$('img#player1avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('p.answer:nth-of-type(3)').addClass('incorrect');
-		// 			$('.player1results').prepend("<p>You answered incorrectly.  That's no good!</p>");
-		// 			$('img#player2avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// 	case 108:
-		// 		$('#108').addClass('highlight');
-		// 		if(question[2]==question[3][2]) {
-		// 			$('#answer3').addClass('correct');
-		// 			$('.player2results').prepend('<p>You answered correctly!</p>');
-		// 			$('img#player2avatar').animate({left: '+=40'});
-		// 		} else {
-		// 			$('#answer3').addClass('incorrect');
-		// 			$('.player2results').prepend('<p>You answered incorrectly!  Boo, ' + player2name + '.</p>');
-		// 			$('img#player1avatar').animate({left: '+=25'});
-		// 		}
-		// 		break;
-		// }
 		window.setTimeout(checkWinner, 1000);
-		playGame();
 	}
 
 	// Function for generating questions and appending the information to the page
@@ -303,29 +285,44 @@ $(document).ready(function() {
 		$('#answer3').text(answers[2]);
 	}
 
-	// *************************
-	// Still needs to be written
+	// Checks the winning conditions
 	function checkWinner () {
 		var racetrack = $('.racetrack').width() - 2 * Number($('.racetrack').css('padding').slice(0,-2));
 		var avatarwidth = $('#player2avatar').width();
+		var winningCondition = racetrack - avatarwidth;
 		var avatar1traveled = Number($('#player1avatar').css('left').slice(0, -2));
 		var avatar2traveled = Number($('#player2avatar').css('left').slice(0, -2));
-		var winningCondition = racetrack - avatarwidth;
-		console.log(winningCondition, player1name, avatar1traveled, player2name, avatar2traveled);
+
+		// If one player wins, updates the wins and losses columns
+		var count;
 		if (avatar1traveled >= winningCondition) {
-			winner = 'player1';
-			console.log(player1name + ' wins the game!');
+			winner = player1name;
+			count = Number($('#player1wins').text())+1;
+			$('#player1wins').text(count);
+			count = Number($('#player2losses').text())+1;
+			$('#player2losses').text(count);
 		} else if (avatar2traveled >= winningCondition) {
-			winner = 'player2';
-			console.log(player2name + ' wins the game!');
+			winner = player2name;
+			count = Number($('#player2wins').text())+1;
+			$('#player2wins').text(count);
+			count = Number($('#player1losses').text())+1;
+			$('#player1losses').text(count);
 		} else {
 			winner = false;
-			console.log('Nobody wins yet. Play on, my friend!');
 		}
 		if (winner) {
 			// animation
 			$questions.hide();
 			$gameresults.show();
+			$('#winner').text(winner);
+			$choosegame.click(function(event) {
+				$gameresults.hide();
+				$gamesetup.show();
+				$('#player1avatar').css('left', '0px');
+				$('#player2avatar').css('left', '0px');
+			});
+		} else {
+			playGame();
 		}
 	}
 

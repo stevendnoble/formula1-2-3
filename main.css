@@ -65,6 +65,7 @@ span {
 		background-color: darkgray;
 		height: 60px;
 		padding: 5px;
+		border-right: 5px solid white;
 	}
 
 	.racetrack:nth-of-type(1) {

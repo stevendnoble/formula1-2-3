@@ -1,7 +1,7 @@
 // wait for DOM to load before running JS
 $(document).ready(function() {
 
-	// Define global variables
+	// Define global variables and paths for jQuery
 	var $gamesetup = $('.gamesetup'),
 			$instructions = $('.instructions'),
 			$questions = $('.questions'),
@@ -32,19 +32,19 @@ $(document).ready(function() {
 				// 	new Player(player2name, player2avatar, player2namebox, player2hide)
 				// ];
 
-	// Event Handlers
+	// Event Handler Functions
+			// OOP ATTEMPT
+			// function changeName(event) {
+			// 	var playernum = Number($(this).attr('id').slice(6, 7));  // player1btn
+			// 	if (player[playernum][name] === '') {
+			// 		alert("You must enter a name first.");
+			// 	} else {
+			// 		$('#' + player[playernum][hide]).hide();
+			// 		$('.' + player[playernum][name] + ' > h2').append(player[playernum][name]);
+			// 	}  
+			// }
 
-				// OOP ATTEMPT
-				// function changeName(event) {
-				// 	var playernum = Number($(this).attr('id').slice(6, 7));  // player1btn
-				// 	if (player[playernum][name] === '') {
-				// 		alert("You must enter a name first.");
-				// 	} else {
-				// 		$('#' + player[playernum][hide]).hide();
-				// 		$('.' + player[playernum][name] + ' > h2').append(player[playernum][name]);
-				// 	}  
-				// }
-
+	// Allows players to change their name			
 	function changeName1(event) {
 		player1name = $('#player1namebox').val();
 		if (player1name === '') {
@@ -63,6 +63,8 @@ $(document).ready(function() {
 			$('.player2name > h2').append(player2name);
 		}
 	}
+
+	// Allows players to click on their name to change again
 	function changeBack1(event) {
 		player2name = $('#player1namebox').val();
 		$('#player1hide').show();
@@ -73,6 +75,8 @@ $(document).ready(function() {
 		$('#player2hide').show();
 		$('.player2name > h2').empty();
 	}
+
+	// Allows players to click on avatars to change the avatars
 	function changeAvatar1(event) {
 		do {
 			player1avatar = (player1avatar + 1) % 10;	
@@ -98,6 +102,8 @@ $(document).ready(function() {
 		$('#player1avatar').click(changeAvatar1);
 		$('#player2avatar').click(changeAvatar2);
 		$gameselect.click(gameSelect);
+
+		// Hides windows that show up later in the game
 		$questions.hide();
 		$instructions.hide();
 		$countdown.hide();
@@ -109,16 +115,20 @@ $(document).ready(function() {
 		$gamesetup.hide();
 		$instructions.show();
 		currentGame = $(this).text();  // i.e. 'Simple Addition'
+
+		// Displays instructions with the game and players names
 		$('.instructions span#game').text(currentGame);
 		$('.instructions span#player1').text(player1name);
 		$('.instructions span#player2').text(player2name);
+
+		// Turns the click off to fix for double, triple, etc clicks on successive games
+		$playgame.off('click');
 		$playgame.click(playGame);	
 	}
 
 	// Starts the (NONFUNCTIONING - needs some timer to keep from going too quickly) countdown, generates a question, and sets click
 	// handler for keypress (needs animation still)
 	function playGame () {
-		var keycode;
 		$questions.hide();
 		$instructions.hide();
 		// $('.countdown').show();
@@ -126,16 +136,26 @@ $(document).ready(function() {
 		$('.countdown > h1:nth-child(1)').fadeIn(fadetime).fadeOut(fadetime);
 		$('.countdown > h1:nth-child(2)').delay(2*fadetime).fadeIn(fadetime).fadeOut(fadetime);
 		$('.countdown > h1:nth-child(3)').delay(4*fadetime).fadeIn(fadetime).fadeOut(fadetime);
+		
+		// Allows for a pause between questions
 		window.setTimeout(function() { 
 			$questions.show(); 
+
+			// Generates a question using functions.js
 			createQuestion(currentGame);
-			$(document).keypress(pressKey);
+			// do {  // ATTEMPT at error handling to check for correct key
+				$(document).keypress(pressKey);
+			// } while ([97, 100, 115, 106, 107, 108].indexOf(event.which) === -1);
 		}, 1000);
 	}
 
+	// Determines what happens when a user clicks on a key
 	function pressKey() {
 		$(document).off('keypress');
+
+		// Determines which key was pressed
 		keycode = event.which;
+
 		function KeycodeConvert(keycode, keycodestr, answer, player, arraynumber) {
 			this.keycode = keycode;
 			this.keycodestr = keycodestr;
@@ -234,8 +254,11 @@ $(document).ready(function() {
 
 	// Function for generating questions and appending the information to the page
 	function createQuestion() {
+
+		// Not functioning - resets color and background
 		$('.answer').css('color', 'yellow');
 		$('.gamebutton').css('background-color', 'orange');
+
 		switch(currentGame) {
 			case 'Simple Addition':
 				question = createAdditionProblem(0, 9, 3);
@@ -275,9 +298,12 @@ $(document).ready(function() {
 				console.log(question, operator);
 				break;
 		}
+
+		// Randomizes the answers
 		question[3] = randomizeArray(question[3]);
 		var answers = question[3];
-		console.log(answers);
+
+		// Displays the question and answers on the page
 		$('.num1').text(question[0]);
 		$('.num2').text(operator + ' ' + question[1]);
 		$('#answer1').text(answers[0]);
@@ -329,8 +355,9 @@ $(document).ready(function() {
 	// Starts the game
 	setBoard();
 
+	// Not using
 	// TO CHANGE TO CUSTOM CSS FOR OTHER OPTIONS
-	// $('.selectcss').attr('href', 'popprincess.css');
-	// $('.selectcss').attr('href', 'geography.css');
+	// $('.selectcss').attr('href', '');
+	// $('.selectcss').attr('href', '');
 
 });

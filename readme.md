@@ -31,7 +31,7 @@ In the future, I plan to add:
 
 ## Screenshot
 
-![alt text](https://github.com/stevennoble78/mathgame/screenshot.png "Game Screenshot"
+![alt text](https://github.com/stevennoble78/mathgame/screenshot.png "Game Screenshot")
 
 ## Link
 

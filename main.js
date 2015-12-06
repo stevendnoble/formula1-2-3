@@ -1,106 +1,91 @@
 // wait for DOM to load before running JS
 $(document).ready(function() {
 
-	// Define global variables and paths for jQuery
-	var $gamesetup = $('.gamesetup'),
-			$instructions = $('.instructions'),
-			$questions = $('.questions'),
-			$gameselect = $('.gameselect'),
-			$playgame = $('.playgame'),
-			$countdown = $('.countdown');
-			$choosegame = $('.choosegame');
-			$gameresults = $('.gameresults');
+// Define global variables and paths for jQuery
+var $gamesetup = $('.gamesetup'),
+		$instructions = $('.instructions'),
+		$questions = $('.questions'),
+		$gameselect = $('.gameselect'),
+		$playgame = $('.playgame'),
+		$countdown = $('.countdown'),
+		$choosegame = $('.choosegame'),
+		$gameresults = $('.gameresults');
 
-	var player1name = 'Player 1',
-			player2name = 'Player 2',
-			player1avatar = 3,
-			player2avatar = 6,
-			currentGame,
-			question,
-			operator;
+var $changePlayer = $('.change-player'),
+		$nameLocation = $('.name-location'),
+		$avatar = $('.avatar');
 
-				// OOP ATTEMPT
-				// var Player = function (name, avatar, namebox, hide) {
-				// 	this.name = name;
-				// 	this.avatar = avatar;
-				// 	this.namebox = namebox;
-				// 	this.hide = hide;
-				// };
-				// var player = [
-				// 	0,
-				// 	new Player(player1name, player1avatar, player1namebox, player1hide),
-				// 	new Player(player2name, player2avatar, player2namebox, player2hide)
-				// ];
+var Player = function (name, avatar, nameInput, hide, nameHeading, button, avatarLocation) {
+	this.name = name;
+	this.avatar = avatar;
+	this.nameInput = nameInput;
+	this.hide = hide;          // This should have a better name!
+	this.nameHeading = nameHeading;
+	this.button = button;
+	this.avatarLocation = avatarLocation;
+};
 
-	// Event Handler Functions
-			// OOP ATTEMPT
-			// function changeName(event) {
-			// 	var playernum = Number($(this).attr('id').slice(6, 7));  // player1btn
-			// 	if (player[playernum][name] === '') {
-			// 		alert("You must enter a name first.");
-			// 	} else {
-			// 		$('#' + player[playernum][hide]).hide();
-			// 		$('.' + player[playernum][name] + ' > h2').append(player[playernum][name]);
-			// 	}  
-			// }
+var players = [
+			new Player('Player 1',
+								 3,
+								 $('#player0-name-input'),
+								 $('#player0hide'),
+								 $('.player0name > h2'),
+								 $('#player0btn'),
+								 $('#avatar0')),
+			new Player('Player 2',
+								 6,
+								 $('#player1-name-input'),
+								 $('#player1hide'),
+								 $('.player1name > h2'),
+								 $('#player1btn'),
+								 $('#avatar1')),
+		],
+		currentGame,
+		question,
+		operator;
 
-	// Allows players to change their name			
-	function changeName1(event) {
-		player1name = $('#player1namebox').val();
-		if (player1name === '') {
-			alert("You must enter a name first.");
-		} else {
-			$('#player1hide').hide();
-			$('.player1name > h2').append(player1name);
-		}
-	}
-	function changeName2(event) {
-		player2name = $('#player2namebox').val();
-		if (player2name === '') {
-			alert("You must enter a name first.");
-		} else {
-			$('#player2hide').hide();
-			$('.player2name > h2').append(player2name);
-		}
-	}
+/////////////////////////////
+// Event Handler Functions //
+/////////////////////////////
 
-	// Allows players to click on their name to change again
-	function changeBack1(event) {
-		player2name = $('#player1namebox').val();
-		$('#player1hide').show();
-		$('.player1name > h2').empty();
+// Allows players to change their name
+function changeName() {
+	event.preventDefault();
+	var num = Number($(this).attr('player-id'));
+	players[num].name = players[num].nameInput.val();
+	if (players[num].name === '') {
+		alert("You must enter a name first.");
+	} else {
+		players[num].hide.hide();
+		players[num].nameHeading.append(players[num].name);
 	}
-	function changeBack2(event) {
-		player2name = $('#player2namebox').val();
-		$('#player2hide').show();
-		$('.player2name > h2').empty();
-	}
+}
 
-	// Allows players to click on avatars to change the avatars
-	function changeAvatar1(event) {
-		do {
-			player1avatar = (player1avatar + 1) % 10;	
-		} while (player1avatar === player2avatar);
-		var player1avatarstr = 'avatars/avatar' + player1avatar + '.png';
-		$('#player1avatar').attr("src", player1avatarstr);
-	}
-	function changeAvatar2(event) {
-		do {
-			player2avatar = (player2avatar + 1) % 10;	
-		} while (player1avatar === player2avatar);
-		var player2avatarstr = 'avatars/avatar' + player2avatar + '.png';
-		$('#player2avatar').attr("src", player2avatarstr);
-	}
+// Allows players to click on their name to change again
+function changeBack() {
+	event.preventDefault();
+	var num = Number($(this).attr('player-id'));
+	players[num].hide.show();
+	players[num].nameHeading.empty();
+}
+
+// Allows players to click on avatars to change the avatars
+function changeAvatar() {
+	var num = Number($(this).attr('player-id'));
+	do {
+		players[num].avatar = (players[num].avatar + 1) % 10;	
+	} while (players[num].avatar === players[(num + 1) % 2].avatar);
+	var avatarstr = 'avatars/avatar' + players[num].avatar + '.png';
+	players[num].avatarLocation.attr("src", avatarstr);
+}
 
 	// Call click handlers and allow user to choose a game
 	function setBoard() {
-		$('#player1btn').click(changeName1);
-		$('#player2btn').click(changeName2);
-		// $('button.playername').click(changeName);  // Attempt to put as one handler
-		$('.player1name > h2').click(changeBack1);
-		$('.player2name > h2').click(changeBack2);
-		$('#player1avatar').click(changeAvatar1);
-		$('#player2avatar').click(changeAvatar2);
+		$changePlayer.on('click', changeName);
+		$nameLocation.on('click', changeBack);
+		$avatar.on('click', changeAvatar);
+
 		$gameselect.click(gameSelect);
 
 		// Hides windows that show up later in the game
@@ -118,8 +103,8 @@ $(document).ready(function() {
 
 		// Displays instructions with the game and players names
 		$('.instructions span#game').text(currentGame);
+		$('.instructions span#player0').text(player0name);
 		$('.instructions span#player1').text(player1name);
-		$('.instructions span#player2').text(player2name);
 
 		// Turns the click off to fix for double, triple, etc clicks on successive games
 		$playgame.off('click');
@@ -164,12 +149,12 @@ $(document).ready(function() {
 			this.arraynumber = arraynumber;
 		}
 		var keycodes = [];
-		keycodes.push(new KeycodeConvert( 97,  '#97', '#answer1', 'player1', 0));
-		keycodes.push(new KeycodeConvert(106, '#106', '#answer1', 'player2', 0));
-		keycodes.push(new KeycodeConvert(115, '#115', '#answer2', 'player1', 1));
-		keycodes.push(new KeycodeConvert(107, '#107', '#answer2', 'player2', 1));
-		keycodes.push(new KeycodeConvert(100, '#100', '#answer3', 'player1', 2));
-		keycodes.push(new KeycodeConvert(108, '#108', '#answer3', 'player2', 2));
+		keycodes.push(new KeycodeConvert( 97,  '#97', '#answer1', 'player0', 0));
+		keycodes.push(new KeycodeConvert(106, '#106', '#answer1', 'player1', 0));
+		keycodes.push(new KeycodeConvert(115, '#115', '#answer2', 'player0', 1));
+		keycodes.push(new KeycodeConvert(107, '#107', '#answer2', 'player1', 1));
+		keycodes.push(new KeycodeConvert(100, '#100', '#answer3', 'player0', 2));
+		keycodes.push(new KeycodeConvert(108, '#108', '#answer3', 'player1', 2));
 
 		// Determines index of keycodes array which corresponds to the keypress
 		var index;
@@ -271,9 +256,9 @@ $(document).ready(function() {
 				console.log(question, operator);
 				break;
 			case 'Simple Subtraction':
-				do{
-						question = createSubtractionProblem(0, 19, 3);
-					} while ((question[1] > 9) || (question[2] > 9));
+				do {
+					question = createSubtractionProblem(0, 19, 3);
+				} while ((question[1] > 9) || (question[2] > 9));
 				operator = '-';
 				console.log(question, operator);
 				break;
@@ -314,25 +299,25 @@ $(document).ready(function() {
 	// Checks the winning conditions
 	function checkWinner () {
 		var racetrack = $('.racetrack').width() - 2 * Number($('.racetrack').css('padding').slice(0,-2));
-		var avatarwidth = $('#player2avatar').width();
+		var avatarwidth = $('#player1avatar').width();
 		var winningCondition = racetrack - avatarwidth;
-		var avatar1traveled = Number($('#player1avatar').css('left').slice(0, -2));
-		var avatar2traveled = Number($('#player2avatar').css('left').slice(0, -2));
+		var avatar1traveled = Number($('#player0avatar').css('left').slice(0, -2));
+		var avatar2traveled = Number($('#player1avatar').css('left').slice(0, -2));
 
 		// If one player wins, updates the wins and losses columns
 		var count;
 		if (avatar1traveled >= winningCondition) {
+			winner = player0name;
+			count = Number($('#player0wins').text())+1;
+			$('#player0wins').text(count);
+			count = Number($('#player1losses').text())+1;
+			$('#player1losses').text(count);
+		} else if (avatar2traveled >= winningCondition) {
 			winner = player1name;
 			count = Number($('#player1wins').text())+1;
 			$('#player1wins').text(count);
-			count = Number($('#player2losses').text())+1;
-			$('#player2losses').text(count);
-		} else if (avatar2traveled >= winningCondition) {
-			winner = player2name;
-			count = Number($('#player2wins').text())+1;
-			$('#player2wins').text(count);
-			count = Number($('#player1losses').text())+1;
-			$('#player1losses').text(count);
+			count = Number($('#player0losses').text())+1;
+			$('#player0losses').text(count);
 		} else {
 			winner = false;
 		}
@@ -344,8 +329,8 @@ $(document).ready(function() {
 			$choosegame.click(function(event) {
 				$gameresults.hide();
 				$gamesetup.show();
+				$('#player0avatar').css('left', '0px');
 				$('#player1avatar').css('left', '0px');
-				$('#player2avatar').css('left', '0px');
 			});
 		} else {
 			playGame();

@@ -31,8 +31,8 @@ In the future, I plan to add:
 
 ## Screenshot
 
-![alt text](https://github.com/stevennoble78/mathgame/blob/master/screenshot.png "Game Screenshot")
+![alt text](https://github.com/stevendnoble/mathgame/blob/master/screenshot.png "Game Screenshot")
 
 ## Link
 
-[Try the game here](http://stevennoble78.github.io/mathgame/)
+[Try the game here](http://formula123.bitballoon.com)

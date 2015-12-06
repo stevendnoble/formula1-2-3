@@ -30,45 +30,48 @@
 
     <div class="racetrackandavatars">
       <div class="row racetrack">
-        <img src="avatars/avatar3.png" class="avatar" id="player1avatar">
+        <img src="avatars/avatar3.png" class="avatar" player-id="0" id="avatar0">
       </div>
       <div class="row racetrack">
-        <img src="avatars/avatar6.png" class="avatar" id="player2avatar">
+        <img src="avatars/avatar6.png" class="avatar" player-id="1" id="avatar1">
       </div>
     </div>
 
     <div class="row">
 
-      <div class="col-md-3 box player">  <!-- Player 1 Column -->
-        <div class="row player1name">
-          <div class="input-group" id="player1hide">
-            <input type="text" class="form-control" id="player1namebox" placeholder="Player 1">
+      <!-- Player 1 Column -->
+      <div class="col-md-3 box player">
+        <div class="row player0name">
+          <div class="input-group" id="player0hide">
+            <input type="text" class="form-control" id="player0-name-input" placeholder="Player 1">
             <span class="input-group-btn">
-              <button class="btn btn-warning player" id="player1btn" type="button">Press me!</button>
+              <button class="btn btn-warning change-player" player-id="0" type="button">Press me!</button>
             </span>
           </div>
-          <h2 class="text-center">
+          <!-- player 1 name appends here -->
+          <h2 class="text-center name-location" player-id="0">
           </h2>
         </div> 
-        <div class="row player1results">
+        <div class="row player0results">
           <h3>Questions Answered
           <ul>
-            <li>Correct:  <span id="player1correct">0</span></li>
-            <li>Incorrect:  <span id="player1incorrect">0</span></li>
+            <li>Correct:  <span id="player0correct">0</span></li>
+            <li>Incorrect:  <span id="player0incorrect">0</span></li>
           </ul>
           </h3>
           <h3>Results
           <ul>
-            <li>Wins:  <span id="player1wins">0</span></li>
-            <li>Losses:  <span id="player1losses">0</span></li>
+            <li>Wins:  <span id="player0wins">0</span></li>
+            <li>Losses:  <span id="player0losses">0</span></li>
           </ul>
           </h3>
           <h3>
-            <span id="player1message"></span>
+            <span id="player0message"></span>
           </h3>
         </div>
       </div>
 
+      <!-- Center Column -->
       <div class="col-md-6 box centerconsole">
 
         <!-- There are several boxes within the console that are hidden and shown using
@@ -94,7 +97,7 @@
         <div class="instructions box">
           <h2 class="text-center">Instructions</h2>          
           <h3 class="text-left">Welcome to the <span id="game"></span> game.</h3>
-          <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player1"></span> will use A, S, and D.  <span id="player2"></span> will use J, K, and L.</h3>
+          <h3>Each player will be assigned three keys to answer multiple choice questions.  <span id="player0"></span> will use A, S, and D.  <span id="player1"></span> will use J, K, and L.</h3>
           <h3>The first player to answer the question correctly will move forward.  Be careful though.  If you answer incorrectly, you will roll backward.</h3>
           <h3>Gentlepeople, start your engines!</h3>
           <button class="btn btn-warning btn-default btn-block playgame">Press to start the game</button>
@@ -159,32 +162,34 @@
         </div>
       </div>
 
+      <!-- Player 2 Column -->
       <div class="col-md-3 box player">
-        <div class="row player2name">
-          <div class="input-group" id="player2hide">
+        <div class="row player1name">
+          <div class="input-group" id="player1hide">
             <span class="input-group-btn">
-              <button class="btn btn-warning playername" id="player2btn" type="button">Press me too!</button>
+              <button class="btn btn-warning change-player" player-id="1" type="button">Press me too!</button>
             </span>
-            <input type="text" class="form-control" id="player2namebox" placeholder="Player 2">
+            <input type="text" class="form-control" id="player1-name-input" placeholder="Player 2">
           </div>
-          <h2 class="text-center">
+          <!-- player 2 name appends here -->
+          <h2 class="text-center name-location" player-id="1">
           </h2>
         </div> 
-        <div class="row player2results">
+        <div class="row player1results">
           <h3>Questions Answered
           <ul>
-            <li>Correct:  <span id="player2correct">0</span></li>
-            <li>Incorrect:  <span id="player2incorrect">0</span></li>
+            <li>Correct:  <span id="player1correct">0</span></li>
+            <li>Incorrect:  <span id="player1incorrect">0</span></li>
           </ul>
           </h3>
           <h3>Results
           <ul>
-            <li>Wins:  <span id="player2wins">0</span></li>
-            <li>Losses:  <span id="player2losses">0</span></li>
+            <li>Wins:  <span id="player1wins">0</span></li>
+            <li>Losses:  <span id="player1losses">0</span></li>
           </ul>
           </h3>
           <h3>
-            <span id="player2message"></span>
+            <span id="player1message"></span>
           </h3>
         </div>
       </div>
